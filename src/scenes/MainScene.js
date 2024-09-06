@@ -32,7 +32,7 @@ export class MainScene extends Scene {
         this.player = new Player({ scene: this });
 
         // Enemy
-        this.enemy_blue = new BlueEnemy(this);
+        //this.enemy_blue = new BlueEnemy(this);
 
         // Cursor keys 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -44,6 +44,7 @@ export class MainScene extends Scene {
         });
 
         // Overlap enemy with bullets
+        /*
         this.physics.add.overlap(this.player.bullets, this.enemy_blue, (enemy, bullet) => {
             bullet.destroyBullet();
             this.enemy_blue.damage(this.player.x, this.player.y);
@@ -51,6 +52,7 @@ export class MainScene extends Scene {
             this.scene.get("HudScene")
                 .update_points(this.points);
         });
+         
 
         // Overlap player with enemy bullets
         this.physics.add.overlap(this.enemy_blue.bullets, this.player, (player, bullet) => {
@@ -62,13 +64,14 @@ export class MainScene extends Scene {
             this.scene.get("HudScene")
                 .update_points(this.points);
         });
+         */
 
         // This event comes from MenuScene
         this.game.events.on("start-game", () => {
             this.scene.stop("MenuScene");
             this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
             this.player.start();
-            this.enemy_blue.start();
+            //this.enemy_blue.start();
 
             // Game Over timeout
             this.time.addEvent({
@@ -92,14 +95,14 @@ export class MainScene extends Scene {
 
     update() {
         this.player.update();
-        this.enemy_blue.update();
+        //this.enemy_blue.update();
 
         // Player movement entries
-        if (this.cursors.up.isDown) {
-            this.player.move("up");
+        if (this.cursors.left.isDown) {
+            this.player.move("left");
         }
-        if (this.cursors.down.isDown) {
-            this.player.move("down");
+        if (this.cursors.right.isDown) {
+            this.player.move("right");
         }
 
     }

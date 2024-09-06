@@ -13,8 +13,8 @@ const config = {
     width: 960,
     height: 540,
     backgroundColor: "#1c172e",
-    pixelArt: true,
-    roundPixel: false,
+    pixelArt: false,
+    roundPixels: true,
     max: {
         width: 800,
         height: 600,

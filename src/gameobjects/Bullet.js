@@ -9,7 +9,7 @@ export class Bullet extends GameObjects.Image
     constructor(scene, x, y) {
         super(scene, x, y, "bullet");
         this.speed = Phaser.Math.GetSpeed(450, 1);
-        this.postFX.addBloom(0xffffff, 1, 1, 2, 1.2);
+        //this.postFX.addBloom(0xffffff, 1, 1, 2, 1.2);
         // Default bullet (player bullet)
         this.name = "bullet";
     }
@@ -22,6 +22,8 @@ export class Bullet extends GameObjects.Image
         this.setPosition(x, y);
         this.setActive(true);
         this.setVisible(true);
+
+        this.end_direction.setTo(1, 0);
 
         // Calculate direction towards target
         if (targetX === 1 && targetY === 0) {
@@ -59,7 +61,7 @@ export class Bullet extends GameObjects.Image
 
     }
 
-    // Update bullet position and destroy if it goes off screen
+    // Update bullet position and destroy if it goes offscreen
     update (time, delta)
     {
         this.x += this.end_direction.x * this.speed * delta;
