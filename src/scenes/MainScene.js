@@ -25,7 +25,7 @@ export class MainScene extends Scene {
 
         // Reset points
         this.points = 0;
-        this.game_over_timeout = 20;
+        this.game_over_timeout = 120;
 
         this.obstacles = this.physics.add.group({
             classType: Obstacle,
@@ -48,16 +48,6 @@ export class MainScene extends Scene {
 
         // Player
         this.player = new Player({ scene: this });
-        
-        for (let i = 0; i < 100; i++) {
-            const current_obstacle = this.obstacles.get();
-            if (current_obstacle) {
-                let current_start_x = Phaser.Math.RND.integerInRange(0, this.scale.width);
-                let current_start_y = Phaser.Math.RND.integerInRange(this.scale.height, this.scale.height + this.scale.height);
-                current_obstacle.spawn(current_start_x, current_start_y);
-            }
-        }
-        
 
         // Enemy
         //this.enemy_blue = new BlueEnemy(this);
@@ -125,6 +115,15 @@ export class MainScene extends Scene {
         this.player.update();
         //this.obstacle.update();
         //this.enemy_blue.update();
+
+        for (let i = 0; i < 20; i++) {
+            const current_obstacle = this.obstacles.get();
+            if (current_obstacle) {
+                let current_start_x = Phaser.Math.RND.integerInRange(0, this.scale.width);
+                let current_start_y = Phaser.Math.RND.integerInRange(this.scale.height, this.scale.height + this.scale.height);
+                current_obstacle.spawn(current_start_x, current_start_y);
+            }
+        }
 
         // Player movement entries
         if (this.cursors.left.isDown) {
