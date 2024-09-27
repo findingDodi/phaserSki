@@ -8,11 +8,10 @@ export class Obstacle extends GameObjects.Image
     constructor(scene, x, y) {
         super(scene, x, y, "house");
         this.speed = Phaser.Math.GetSpeed(450, 1);
-        // Default bullet (player bullet)
         this.name = "obstacle";
     }
 
-    spawn (x, y, targetX = 1, targetY = 0, obstacle_texture = "house")
+    spawn(x, y, targetX = 1, targetY = 0, obstacle_texture = "house")
     {
         // Change bullet change texture
         this.setTexture(obstacle_texture);

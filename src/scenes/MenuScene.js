@@ -14,25 +14,18 @@ export class MenuScene extends Scene {
         // Background rectangles
         this.add.rectangle(
             0,
-            this.scale.height / 2,
-            this.scale.width,
-            120,
-            0xffffff
-        ).setAlpha(.8).setOrigin(0, 0.5);
-        this.add.rectangle(
             0,
-            this.scale.height / 2 + 85,
             this.scale.width,
-            50,
+            this.scale.height,
             0x000000
-        ).setAlpha(.8).setOrigin(0, 0.5);
+        ).setOrigin(0, 0);
 
         // Logo
         const logo_game = this.add.bitmapText(
             this.scale.width / 2,
             this.scale.height / 2,
             "knighthawks",
-            "PHASER'S\nREVENGE",
+            "PY SKI",
             52,
             1
         )

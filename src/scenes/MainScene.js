@@ -1,6 +1,7 @@
 import { Scene } from "phaser";
 import { Player } from "../gameobjects/Player";
 import { BlueEnemy } from "../gameobjects/BlueEnemy";
+import {Obstacle} from "../gameobjects/Obstacle.js";
 
 export class MainScene extends Scene {
     player = null;
@@ -24,12 +25,21 @@ export class MainScene extends Scene {
     }
 
     create() {
-        this.add.image(0, 0, "background")
-            .setOrigin(0, 0);
-        this.add.image(0, this.scale.height, "floor").setOrigin(0, 1);
+        //this.add.image(0, 0, "background").setOrigin(0, 0);
+        //this.add.image(0, this.scale.height, "floor").setOrigin(0, 1);
+
+        this.add.rectangle(
+            0,
+            0,
+            this.scale.width,
+            this.scale.height,
+            0xffffff
+        ).setOrigin(0, 0);   
 
         // Player
         this.player = new Player({ scene: this });
+        this.obstacle = new Obstacle(this, 200, 200);
+        this.obstacle.spawn(200, 200, 0, "house");
 
         // Enemy
         //this.enemy_blue = new BlueEnemy(this);
@@ -69,7 +79,7 @@ export class MainScene extends Scene {
         // This event comes from MenuScene
         this.game.events.on("start-game", () => {
             this.scene.stop("MenuScene");
-            this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
+            //this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
             this.player.start();
             //this.enemy_blue.start();
 
@@ -82,11 +92,11 @@ export class MainScene extends Scene {
                         // You need remove the event listener to avoid duplicate events.
                         this.game.events.removeListener("start-game");
                         // It is necessary to stop the scenes launched in parallel.
-                        this.scene.stop("HudScene");
+                        //this.scene.stop("HudScene");
                         this.scene.start("GameOverScene", { points: this.points });
                     } else {
                         this.game_over_timeout--;
-                        this.scene.get("HudScene").update_timeout(this.game_over_timeout);
+                        //this.scene.get("HudScene").update_timeout(this.game_over_timeout);
                     }
                 }
             });
