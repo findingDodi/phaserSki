@@ -64,6 +64,7 @@ export class Player extends Physics.Arcade.Image {
     update() {
         // Sinusoidal movement up and down up and down 2px
         this.x += Math.sin(this.scene.time.now / 200) * 0.10;
+        //console.log(this.x, this.y);
     }
 
 }

@@ -2,17 +2,21 @@ import { Scene } from "phaser";
 import { Player } from "../gameobjects/Player";
 import { BlueEnemy } from "../gameobjects/BlueEnemy";
 import {Obstacle} from "../gameobjects/Obstacle.js";
+import {Bullet} from "../gameobjects/Bullet.js";
 
 export class MainScene extends Scene {
     player = null;
     enemy_blue = null;
     cursors = null;
+    obstacles = null;
 
     points = 0;
     game_over_timeout = 20;
 
     constructor() {
         super("MainScene");
+
+        
     }
 
     init() {
@@ -22,6 +26,12 @@ export class MainScene extends Scene {
         // Reset points
         this.points = 0;
         this.game_over_timeout = 20;
+
+        this.obstacles = this.physics.add.group({
+            classType: Obstacle,
+            maxSize: 100,
+            runChildUpdate: true
+        });
     }
 
     create() {
@@ -38,8 +48,11 @@ export class MainScene extends Scene {
 
         // Player
         this.player = new Player({ scene: this });
-        this.obstacle = new Obstacle(this, 200, 200);
-        this.obstacle.spawn(200, 200, 0, "house");
+
+        const _obstacle = this.obstacles.get();
+        if (_obstacle) {
+            _obstacle.spawn(this.scale.width / 2, this.scale.height);
+        }
 
         // Enemy
         //this.enemy_blue = new BlueEnemy(this);
@@ -105,6 +118,7 @@ export class MainScene extends Scene {
 
     update() {
         this.player.update();
+        //this.obstacle.update();
         //this.enemy_blue.update();
 
         // Player movement entries

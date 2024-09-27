@@ -4,17 +4,19 @@ export class Obstacle extends GameObjects.Image
 {
     speed;
     end_direction = new Math.Vector2(0, 0);
+    possible_obsticles = ["house", "stone", "tree"];
 
     constructor(scene, x, y) {
         super(scene, x, y, "house");
-        this.speed = Phaser.Math.GetSpeed(450, 1);
+        this.speed = Phaser.Math.GetSpeed(50, 1);
         this.name = "obstacle";
     }
 
-    spawn(x, y, targetX = 1, targetY = 0, obstacle_texture = "house")
+    spawn(x, y, targetX = 1, targetY = 0)
     {
         // Change bullet change texture
-        this.setTexture(obstacle_texture);
+        let random_texture_index = Phaser.Math.RND.integerInRange(0, this.possible_obsticles.length - 1);
+        this.setTexture(this.possible_obsticles[random_texture_index]);
 
         this.setPosition(x, y);
         this.setActive(true);
