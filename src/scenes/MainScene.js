@@ -48,11 +48,16 @@ export class MainScene extends Scene {
 
         // Player
         this.player = new Player({ scene: this });
-
-        const _obstacle = this.obstacles.get();
-        if (_obstacle) {
-            _obstacle.spawn(this.scale.width / 2, this.scale.height);
+        
+        for (let i = 0; i < 100; i++) {
+            const current_obstacle = this.obstacles.get();
+            if (current_obstacle) {
+                let current_start_x = Phaser.Math.RND.integerInRange(0, this.scale.width);
+                let current_start_y = Phaser.Math.RND.integerInRange(this.scale.height, this.scale.height + this.scale.height);
+                current_obstacle.spawn(current_start_x, current_start_y);
+            }
         }
+        
 
         // Enemy
         //this.enemy_blue = new BlueEnemy(this);
