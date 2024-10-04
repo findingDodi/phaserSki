@@ -1,4 +1,7 @@
-# PySki
+# PhaserSki
+
+A PySki clone but in Phaser.  
+https://github.com/findingDodi/pySki
 
 ## Instructions
 1. Clone the repository.
