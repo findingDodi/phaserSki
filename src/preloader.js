@@ -1,5 +1,3 @@
-// Class to preload all the assets
-// Remember you can load this assets in another scene if you need it
 export class Preloader extends Phaser.Scene {
     constructor() {
         super({ key: "Preloader" });
@@ -9,27 +7,14 @@ export class Preloader extends Phaser.Scene {
         // Load all the assets
         this.load.setPath("assets");
         this.load.image("logo", "logo.png");
-        this.load.image("floor");
-        this.load.image("background", "background.png");
 
         this.load.image("player", "player/player.png");
-        this.load.atlas("propulsion-fire", "player/propulsion/propulsion-fire.png", "player/propulsion/propulsion-fire_atlas.json");
-        this.load.animation("propulsion-fire-anim", "player/propulsion/propulsion-fire_anim.json");
-
-        // Bullets
-        this.load.image("bullet", "player/bullet.png");
-        this.load.image("flares")
-        
+                
         // Obstacles
         this.load.image("house", "obstacles/house.png");
         this.load.image("stone", "obstacles/stone.png");
         this.load.image("tree", "obstacles/tree.png");
-
-        // Enemies
-        this.load.atlas("enemy-blue", "enemies/enemy-blue/enemy-blue.png", "enemies/enemy-blue/enemy-blue_atlas.json");
-        this.load.animation("enemy-blue-anim", "enemies/enemy-blue/enemy-blue_anim.json");
-        this.load.image("enemy-bullet", "enemies/enemy-bullet.png");
-
+        
         // Fonts
         this.load.bitmapFont("pixelfont", "fonts/pixelfont.png", "fonts/pixelfont.xml");
         this.load.bitmapFont("pixelfont_black", "fonts/pixelfont_black.png", "fonts/pixelfont.xml");

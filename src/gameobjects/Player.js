@@ -1,5 +1,5 @@
-import { GameObjects, Physics } from "phaser";
-import { Bullet } from "./Bullet";
+import { Physics } from "phaser";
+import { Obstacle } from "./Obstacle.js";
 
 export class Player extends Physics.Arcade.Image {
     
@@ -14,9 +14,9 @@ export class Player extends Physics.Arcade.Image {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         
-        // Bullets group to create pool
+        // Obstacles group to create pool
         this.obstacles = this.scene.physics.add.group({
-            classType: Bullet,
+            classType: Obstacle,
             maxSize: 100,
             runChildUpdate: true
         });
@@ -25,7 +25,7 @@ export class Player extends Physics.Arcade.Image {
     start() {
         this.state = "start";
 
-        // Effect to move the player from left to right
+        // player slides in from above to y=200
         this.scene.tweens.add({
             targets: this,
             y: 200,
@@ -33,7 +33,6 @@ export class Player extends Physics.Arcade.Image {
             delay: 1000,
             ease: "Power2",
             yoyo: false,
-            onUpdate: () => {},
             onComplete: () => {
                 // When all tween are finished, the player can move
                 this.state = "can_move";
@@ -50,21 +49,10 @@ export class Player extends Physics.Arcade.Image {
             }
         }
     }
-
-    fire(x, y) {
-        if (this.state === "can_move") {
-            // Create bullet
-            const bullet = this.obstacles.get();
-            if (bullet) {
-                bullet.fire(this.x + 16, this.y + 5, x, y);
-            }
-        }
-    }
     
     update() {
-        // Sinusoidal movement up and down up and down 2px
+        // wiggle
         this.x += Math.sin(this.scene.time.now / 200) * 0.10;
-        //console.log(this.x, this.y);
     }
 
 }

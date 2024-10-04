@@ -12,9 +12,7 @@ export class Obstacle extends GameObjects.Image
         this.name = "obstacle";
     }
 
-    spawn(x, y, targetX = 1, targetY = 0)
-    {
-        // Change bullet change texture
+    spawn(x, y) {
         let random_texture_index = Phaser.Math.RND.integerInRange(0, this.possible_obsticles.length - 1);
         this.setTexture(this.possible_obsticles[random_texture_index]);
 
@@ -26,12 +24,11 @@ export class Obstacle extends GameObjects.Image
     }
 
     // Update obstacle position and destroy if it goes offscreen
-    update(time, delta)
-    {
+    update(time, delta){
         this.x += this.end_direction.x * this.speed * delta;
         this.y += this.end_direction.y * this.speed * delta;
 
-        // Verifica si la bala ha salido de la pantalla
+        // Check if Obstacles are offscreen
         if (this.x > this.scene.sys.canvas.width || this.x < 0 || this.y < 0) {
             this.setActive(false);
             this.setVisible(false);

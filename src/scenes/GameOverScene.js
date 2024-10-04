@@ -12,10 +12,6 @@ export class GameOverScene extends Scene {
     }
 
     create() {
-        // Backgrounds
-        //this.add.image(0, 0, "background").setOrigin(0, 0);
-        //this.add.image(0, this.scale.height, "floor").setOrigin(0, 1);
-
         // Rectangles to show the text
         // Background rectangles
         this.add.rectangle(
@@ -36,16 +32,6 @@ export class GameOverScene extends Scene {
         )
         gameover_text.setOrigin(0.5, 0.5);
         gameover_text.postFX.addShine();
-        
-        /*
-        this.add.bitmapText(
-            this.scale.width / 2,
-            this.scale.height / 2 + 85,
-            "pixelfont",
-            `YOUR POINTS: ${this.end_points}`,
-            24
-        ).setOrigin(0.5, 0.5);
-        */
 
         this.add.bitmapText(
             this.scale.width / 2,
