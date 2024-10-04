@@ -6,12 +6,12 @@ import {Bullet} from "../gameobjects/Bullet.js";
 
 export class MainScene extends Scene {
     player = null;
-    enemy_blue = null;
+    //enemy_blue = null;
     cursors = null;
     obstacles = null;
 
     points = 0;
-    game_over_timeout = 20;
+    //game_over_timeout = 20;
 
     constructor() {
         super("MainScene");
@@ -25,7 +25,7 @@ export class MainScene extends Scene {
 
         // Reset points
         this.points = 100;
-        this.game_over_timeout = 120;
+        //this.game_over_timeout = 120;
 
         this.obstacles = this.physics.add.group({
             classType: Obstacle,
@@ -98,7 +98,7 @@ export class MainScene extends Scene {
         // This event comes from MenuScene
         this.game.events.on("start-game", () => {
             this.scene.stop("MenuScene");
-            this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
+            this.scene.launch("HudScene");
             this.player.start();
             //this.enemy_blue.start();
             
@@ -115,7 +115,7 @@ export class MainScene extends Scene {
                         this.scene.start("GameOverScene", { points: this.points });
                     } else {
                         this.game_over_timeout--;
-                        this.scene.get("HudScene").update_timeout(this.game_over_timeout);
+                        //this.scene.get("HudScene").update_timeout(this.game_over_timeout);
                     }
                 }
             });
@@ -132,7 +132,7 @@ export class MainScene extends Scene {
             this.game.events.removeListener("start-game");
             // It is necessary to stop the scenes launched in parallel.
             this.scene.stop("HudScene");
-            this.scene.start("GameOverScene", { points: this.points });
+            this.scene.start("GameOverScene");
         }
 
         for (let i = 0; i < 20; i++) {
