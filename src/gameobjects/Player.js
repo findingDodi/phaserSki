@@ -6,7 +6,7 @@ export class Player extends Physics.Arcade.Image {
     // Player states: waiting, start, can_move
     state = "waiting";
     scene = null;
-    bullets = null;
+    obstacles = null;
 
     constructor({scene}) {
         super(scene, 100, -190, "player");
@@ -15,7 +15,7 @@ export class Player extends Physics.Arcade.Image {
         this.scene.physics.add.existing(this);
         
         // Bullets group to create pool
-        this.bullets = this.scene.physics.add.group({
+        this.obstacles = this.scene.physics.add.group({
             classType: Bullet,
             maxSize: 100,
             runChildUpdate: true
@@ -42,7 +42,7 @@ export class Player extends Physics.Arcade.Image {
     }
 
     move(direction) {
-        if(this.state === "can_move") {
+        if (this.state === "can_move") {
             if (direction === "left" && this.x - 10 > 0) {
                 this.x -= 5;
             } else if (direction === "right" && this.x + 10 < this.scene.scale.width) {
@@ -54,7 +54,7 @@ export class Player extends Physics.Arcade.Image {
     fire(x, y) {
         if (this.state === "can_move") {
             // Create bullet
-            const bullet = this.bullets.get();
+            const bullet = this.obstacles.get();
             if (bullet) {
                 bullet.fire(this.x + 16, this.y + 5, x, y);
             }

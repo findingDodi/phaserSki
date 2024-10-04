@@ -57,6 +57,7 @@ export class BlueEnemy extends Physics.Arcade.Sprite {
         }
 
         this.anims.play("hit");
+        
         if (!this.animation_is_playing && this.scale_damage > 1) {
             if (this.damage_life_point === 0) {
 

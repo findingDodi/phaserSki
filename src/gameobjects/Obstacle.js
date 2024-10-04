@@ -26,7 +26,7 @@ export class Obstacle extends GameObjects.Image
     }
 
     // Update obstacle position and destroy if it goes offscreen
-    update (time, delta)
+    update(time, delta)
     {
         this.x += this.end_direction.x * this.speed * delta;
         this.y += this.end_direction.y * this.speed * delta;

@@ -24,7 +24,7 @@ export class MainScene extends Scene {
         this.scene.launch("MenuScene");
 
         // Reset points
-        this.points = 0;
+        this.points = 100;
         this.game_over_timeout = 120;
 
         this.obstacles = this.physics.add.group({
@@ -53,6 +53,7 @@ export class MainScene extends Scene {
         //this.enemy_blue = new BlueEnemy(this);
 
         // Cursor keys 
+        
         this.cursors = this.input.keyboard.createCursorKeys();
         this.cursors.space.on("down", () => {
             this.player.fire();
@@ -60,6 +61,7 @@ export class MainScene extends Scene {
         this.input.on("pointerdown", (pointer) => {
             this.player.fire(pointer.x, pointer.y);
         });
+        
 
         // Overlap enemy with bullets
         /*
@@ -70,19 +72,28 @@ export class MainScene extends Scene {
             this.scene.get("HudScene")
                 .update_points(this.points);
         });
-         
-
+        
         // Overlap player with enemy bullets
         this.physics.add.overlap(this.enemy_blue.bullets, this.player, (player, bullet) => {
             bullet.destroyBullet();
             this.cameras.main.shake(100, 0.01);
             // Flash the color white for 300ms
-            this.cameras.main.flash(300, 255, 10, 10, false,);
+            this.cameras.main.flash(300, 255, 10, 10, false);
             this.points -= 10;
-            this.scene.get("HudScene")
-                .update_points(this.points);
+            this.scene.get("HudScene").update_points(this.points);
         });
          */
+
+        // Overlap player with obstacles
+        this.physics.add.overlap(this.obstacles, this.player, (player, obstacle) => {
+            obstacle.destroy();
+            this.cameras.main.shake(100, 0.01);
+            // Flash the color red for 300ms
+            this.cameras.main.flash(300, 255, 10, 10, false);
+            this.points -= 10;
+            //this.scene.get("HudScene").update_points(this.points);
+        });
+         
 
         // This event comes from MenuScene
         this.game.events.on("start-game", () => {
@@ -90,7 +101,7 @@ export class MainScene extends Scene {
             //this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
             this.player.start();
             //this.enemy_blue.start();
-
+            
             // Game Over timeout
             this.time.addEvent({
                 delay: 1000,
@@ -115,6 +126,14 @@ export class MainScene extends Scene {
         this.player.update();
         //this.obstacle.update();
         //this.enemy_blue.update();
+
+        if (this.points === 0) {
+            // You need remove the event listener to avoid duplicate events.
+            this.game.events.removeListener("start-game");
+            // It is necessary to stop the scenes launched in parallel.
+            //this.scene.stop("HudScene");
+            this.scene.start("GameOverScene", { points: this.points });
+        }
 
         for (let i = 0; i < 20; i++) {
             const current_obstacle = this.obstacles.get();
