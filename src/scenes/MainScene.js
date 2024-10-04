@@ -91,14 +91,14 @@ export class MainScene extends Scene {
             // Flash the color red for 300ms
             this.cameras.main.flash(300, 255, 10, 10, false);
             this.points -= 10;
-            //this.scene.get("HudScene").update_points(this.points);
+            this.scene.get("HudScene").update_points(this.points);
         });
          
 
         // This event comes from MenuScene
         this.game.events.on("start-game", () => {
             this.scene.stop("MenuScene");
-            //this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
+            this.scene.launch("HudScene", { remaining_time: this.game_over_timeout });
             this.player.start();
             //this.enemy_blue.start();
             
@@ -111,11 +111,11 @@ export class MainScene extends Scene {
                         // You need remove the event listener to avoid duplicate events.
                         this.game.events.removeListener("start-game");
                         // It is necessary to stop the scenes launched in parallel.
-                        //this.scene.stop("HudScene");
+                        this.scene.stop("HudScene");
                         this.scene.start("GameOverScene", { points: this.points });
                     } else {
                         this.game_over_timeout--;
-                        //this.scene.get("HudScene").update_timeout(this.game_over_timeout);
+                        this.scene.get("HudScene").update_timeout(this.game_over_timeout);
                     }
                 }
             });
@@ -131,7 +131,7 @@ export class MainScene extends Scene {
             // You need remove the event listener to avoid duplicate events.
             this.game.events.removeListener("start-game");
             // It is necessary to stop the scenes launched in parallel.
-            //this.scene.stop("HudScene");
+            this.scene.stop("HudScene");
             this.scene.start("GameOverScene", { points: this.points });
         }
 

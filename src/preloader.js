@@ -32,6 +32,7 @@ export class Preloader extends Phaser.Scene {
 
         // Fonts
         this.load.bitmapFont("pixelfont", "fonts/pixelfont.png", "fonts/pixelfont.xml");
+        this.load.bitmapFont("pixelfont_black", "fonts/pixelfont_black.png", "fonts/pixelfont.xml");
         this.load.image("knighthawks", "fonts/knight3.png");
 
         // Event to update the loading bar

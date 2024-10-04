@@ -34,7 +34,7 @@ const config = {
         SplashScene,
         MainScene,
         MenuScene,
-        //HudScene,
+        HudScene,
         GameOverScene
     ]
 };
